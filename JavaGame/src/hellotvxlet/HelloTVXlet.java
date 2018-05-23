@@ -28,6 +28,7 @@ import org.havi.ui.event.HBackgroundImageListener;
 public class HelloTVXlet implements Xlet, ResourceClient, UserEventListener, HBackgroundImageListener {
     private HStaticText triedText;
     private HStaticText scoreText;
+    private HStaticText winText;
 
     private int huidig = 1;
     private int pressedEnter = 0;
@@ -101,13 +102,17 @@ public class HelloTVXlet implements Xlet, ResourceClient, UserEventListener, HBa
         //EventManager
         EventManager.getInstance().addUserEventListener(this,repository);
         
-        triedText = new HStaticText("Times tried: ", 420, 160,300,400); // x,y,w,h
+        triedText = new HStaticText("Times tried: ", 450,400,300,400); // x,y,w,h
         triedText.setVerticalAlignment(HStaticText.VALIGN_TOP);
         scene.add(triedText);
 
-        scoreText = new HStaticText("Score: ", 420, 220,300,400); // x,y,w,h
+        scoreText = new HStaticText("Score: ", 450,460,300,400); // x,y,w,h
         scoreText.setVerticalAlignment(HStaticText.VALIGN_TOP);
         scene.add(scoreText);
+        
+        winText = new HStaticText("", 450,200,300,400); // x,y,w,h
+        winText.setVerticalAlignment(HStaticText.VALIGN_TOP);
+        scene.add(winText);
         
         scene.validate();
         scene.setVisible(true);   
@@ -545,6 +550,10 @@ public class HelloTVXlet implements Xlet, ResourceClient, UserEventListener, HBa
             }
             if (score == 8) {
                 System.out.println("YOU WON ;D");
+                String youWon = winText.getTextContent(HVisible.NORMAL_STATE);
+                youWon = "YOU WON!!! ;D";
+                winText.setTextContent(youWon, HVisible.NORMAL_STATE); //stelt inhoud in
+                winText.repaint();
             }
         }
         System.out.print("fistCard = " + firstCard + " secondCard = " + secondCard + "\n");
